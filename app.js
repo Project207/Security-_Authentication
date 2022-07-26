@@ -1,5 +1,5 @@
 //jshint esversion:6
-
+require('dotenv').config()
 const express = require("express")
 const app = express()
 
@@ -30,8 +30,8 @@ const userSchema = new mongoose.Schema({
 
 //excryption should happen before model
 
-const SECRET_KEY="ThisisMyOwnSecretString."
-userSchema.plugin(encrypt, { secret:SECRET_KEY ,encryptedFields: ['password']});
+
+userSchema.plugin(encrypt, { secret:process.env.SECRET_KEY ,encryptedFields: ['password']});
 //can enter more filed in an array above by ,
 
 const User = new  mongoose.model("user",userSchema)
